@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge, chrome=1" />
+    <title>Kepler-452b</title>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/fonts/stylesheet.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="/bundle.css" /> -->
+    <link rel="stylesheet/less" type="text/css" href="style/main.less" />
+    <script src="https://cdn.jsdelivr.net/npm/less@4.1.1"></script>
+</head>
+
+<body>
+    <nav class="nav font-gm">
+        <div class="kepler">
+            <img src="images/kepler.png" />
+        </div>
+        <div class="wallet-address-container">
+            <h3 id="wallet-address"></h3>
+        </div>
+    </nav>
+
+    <div class="banner">
+        <img src="images/banner.png">
+    </div>
+
+    <div class="container">
+        <div class="mint font-gm">
+            <h3>mint</h3>
+            <ul class="mint-count-container">
+                <li>
+                    <div class="mint-button" id="mint-1-button">1</div>
+                </li>
+                <li>
+                    <div class="mint-button" id="mint-2-button">2</div>
+                </li>
+                <li>
+                    <div class="mint-button" id="mint-5-button">5</div>
+                </li>
+                <li>
+                    <div class="mint-button" id="mint-10-button">10</div>
+                </li>
+                <li>
+                    <div class="mint-button" id="mint-20-button">20</div>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="mint-bar-container">
+            <progress id="mint-bar" class="mint-bar" value="0" , max="9500"></progress>
+            <p class="left" id="remains">?</p>
+        </div>
+
+
+        <div class="connect-wallet font-gm">
+            <button id="connect-wallet-button">Connect Wallet</button>
+            <p class="mint-price">1 Meta Cell = 40 Klay</p>
+            <p class="mint-balance" id="balance">Your Klay balance = ?</p>
+        </div>
+
+
+        <div class="page">
+            <div class="move-klubs">
+                <p>go to klubs</p>
+                <a href="https://klu.bs/pfp/0x6Da2e8B440308ce215E446d5b6Bec19be44B0Be2">
+                    <img src="images/klubs.svg" />
+                </a>
+            </div>
+            <div class="move-official-website">
+                <p>go to official website</p>
+                <a href="http://kepler-452b.net/">Kepler-452b</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/caver.min.js"></script>
+    <script src="/bundle.js"></script>
+</body>
+
+</html>
+
+</html>

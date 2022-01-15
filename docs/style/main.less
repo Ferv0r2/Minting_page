@@ -1,0 +1,176 @@
+@import "base.less";
+
+* {
+  background-color: #000;
+  color: #f0f4f5;
+  text-align: center;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  align-items: center;
+  height: 100%;
+}
+
+.font-gm {
+  font-family: "GmarketSansBold";
+}
+
+.nav {
+  display: flex;
+  margin: 50px;
+  justify-content: space-between;
+  font-style: italic;
+
+  .kepler {
+    font-size: 24px;
+
+    &:after {
+      content: "Kepler-452b";
+      display: inline-block;
+      vertical-align: middle;
+      height: 100%;
+    }
+  }
+
+  .wallet-address-container {
+    margin-top: 15px;
+    display: flex;
+  }
+}
+
+.banner {
+  margin-top: -50px;
+
+  > img {
+    width: 80%;
+  }
+}
+
+.container {
+  margin-left: 25%;
+  margin-right: 25%;
+
+  .mint {
+    display: inline-block;
+
+    > h3 {
+      font-size: 30px;
+      font-style: italic;
+      text-shadow: 0 0 7px #ac01b4, 0 0 10px #ac01b4, 0 0 21px #ac01b4;
+    }
+
+    .mint-count-container {
+      display: flex;
+      justify-content: space-between;
+      text-decoration: none;
+      list-style: none;
+      padding-top: 10px;
+      -webkit-padding-start: 0;
+
+      > li {
+        flex: 1;
+        margin: 10px;
+        width: 40px;
+
+        .mint-button {
+          background-color: #f100ff;
+          border-radius: 0.2em;
+          padding: 0.5em;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.mint-bar-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 5%;
+  padding-right: 20px;
+
+  &::before {
+    content: "mint progress";
+  }
+
+  &:after {
+    content: "/9500";
+  }
+
+  > progress {
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 300px;
+  }
+  ::-webkit-progress-bar {
+    background: #fff;
+    border-radius: 0.3em;
+  }
+  ::-webkit-progress-value {
+    background: #f100ff;
+    border-radius: 0.3em;
+  }
+}
+
+.connect-wallet {
+  padding-top: 5%;
+
+  > button {
+    width: 30%;
+    padding: 0.3em;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border-radius: 0.5em;
+    background: linear-gradient(to top, #3f0eac, #ff00cc);
+  }
+
+  > p {
+    padding: 5px 10px;
+    font-size: 16px;
+    font-family: "NanumSquareExtraBold";
+  }
+  .mint-balance::after {
+    content: "";
+  }
+}
+
+.page {
+  display: inline-block;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  font-size: 22px;
+  font-family: "NanumSquareExtraBold";
+
+  > div {
+    display: flex;
+
+    > p {
+      width: 300px;
+      text-align: right;
+
+      &::after {
+        margin: 20px;
+        content: ">";
+      }
+    }
+  }
+
+  .move-official-website {
+    padding-top: 10px;
+
+    > a {
+      text-decoration: none;
+      color: #ff00ff;
+      font-style: italic;
+      font-family: "GmarketSansMedium";
+    }
+  }
+}

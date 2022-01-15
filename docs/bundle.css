@@ -1,0 +1,313 @@
+/*
+https://github.com/Hanul/sky-css-base
+v0.0.1 | 20210109
+Author: Sim Young Jae
+License: MIT
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+*,
+*:focus {
+  outline: 0;
+}
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+a,
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer;
+}
+button,
+input {
+  border: none;
+}
+[hidden] {
+  display: none !important;
+}
+[contenteditable] {
+  -webkit-tap-highlight-color: transparent;
+}
+.float-wrapper:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+* {
+  background-color: #000;
+  color: #f0f4f5;
+  text-align: center;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+html {
+  height: 100%;
+}
+body {
+  align-items: center;
+  height: 100%;
+}
+.font-gm {
+  font-family: "GmarketSansBold";
+}
+.nav {
+  display: flex;
+  margin: 50px;
+  justify-content: space-between;
+  font-style: italic;
+}
+.nav .kepler {
+  font-size: 24px;
+}
+.nav .kepler:after {
+  content: "Kepler-452b";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+.nav .wallet-address-container {
+  margin-top: 15px;
+  display: flex;
+}
+.banner {
+  margin-top: -50px;
+}
+.banner > img {
+  width: 80%;
+}
+.container {
+  margin-left: 25%;
+  margin-right: 25%;
+}
+.container .mint {
+  display: inline-block;
+}
+.container .mint > h3 {
+  font-size: 30px;
+  font-style: italic;
+  text-shadow: 0 0 7px #ac01b4, 0 0 10px #ac01b4, 0 0 21px #ac01b4;
+}
+.container .mint .mint-count-container {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  list-style: none;
+  padding-top: 10px;
+  -webkit-padding-start: 0;
+}
+.container .mint .mint-count-container > li {
+  flex: 1;
+  margin: 10px;
+  width: 40px;
+}
+.container .mint .mint-count-container > li .mint-button {
+  background-color: #f100ff;
+  border-radius: 0.2em;
+  padding: 0.5em;
+  cursor: pointer;
+}
+.mint-bar-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 5%;
+  padding-right: 20px;
+}
+.mint-bar-container::before {
+  content: "mint progress";
+}
+.mint-bar-container:after {
+  content: "/9500";
+}
+.mint-bar-container > progress {
+  margin-right: 20px;
+  margin-left: 20px;
+  width: 300px;
+}
+.mint-bar-container ::-webkit-progress-bar {
+  background: #fff;
+  border-radius: 0.3em;
+}
+.mint-bar-container ::-webkit-progress-value {
+  background: #f100ff;
+  border-radius: 0.3em;
+}
+.connect-wallet {
+  padding-top: 5%;
+}
+.connect-wallet > button {
+  width: 30%;
+  padding: 0.3em;
+  margin-bottom: 20px;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: linear-gradient(to top, #3f0eac, #ff00cc);
+}
+.connect-wallet > p {
+  padding: 5px 10px;
+  font-size: 16px;
+  font-family: "NanumSquareExtraBold";
+}
+.connect-wallet .mint-balance::after {
+  content: "";
+}
+.page {
+  display: inline-block;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  font-size: 22px;
+  font-family: "NanumSquareExtraBold";
+}
+.page > div {
+  display: flex;
+}
+.page > div > p {
+  width: 300px;
+  text-align: right;
+}
+.page > div > p::after {
+  margin: 20px;
+  content: ">";
+}
+.page .move-official-website {
+  padding-top: 10px;
+}
+.page .move-official-website > a {
+  text-decoration: none;
+  color: #ff00ff;
+  font-style: italic;
+  font-family: "GmarketSansMedium";
+}
+
