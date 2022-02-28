@@ -1,0 +1,38 @@
+.MintBox {
+  float: left;
+  width: 65%;
+  height: 500px;
+  color: #fff;
+}
+
+.MintBox__contents {
+  margin: 20px;
+  text-align: center;
+  justify-content: space-between;
+
+  img {
+    padding: 15px;
+    width: 200px;
+  }
+}
+
+.MintBox__button {
+  font-size: 24px;
+  margin: 20px;
+  padding: 20px;
+  border: 5px solid $hover-color;
+  border-radius: 10px;
+  margin-left: 300px;
+  margin-right: 300px;
+}
+
+.MintBox__count {
+  margin: 20px;
+  font-size: 20px;
+}
+
+.MintBox__balanceOf {
+  font-size: 20px;
+  padding: 20px;
+  background-color: $hover-color;
+}

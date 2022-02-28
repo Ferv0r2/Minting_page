@@ -1,0 +1,52 @@
+.Nav {
+  width: 100%;
+  height: 85px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  color: $white;
+  z-index: 100;
+  @include cardBox();
+}
+
+.Nav__inner {
+  max-width: $max-page-width;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    font-style: italic;
+    font-size: 32px;
+  }
+}
+
+.Nav__logo {
+  width: 160px;
+  vertical-align: middle;
+  img {
+    width: 60px;
+  }
+}
+
+.Nav__Balance {
+  padding: 2px 15px;
+  border: 1px solid $hover-color;
+  border-radius: 5px;
+  font-size: 13px;
+  color: $hover-color;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 160px;
+
+  span {
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 10px;
+  }
+}
