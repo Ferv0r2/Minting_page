@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import caver from "klaytn/caver";
+import keplerContract from "klaytn/keplerContract";
 
 import "./MintBox.scss";
+
+const mixCA = "0xdd483a970a7a7fef2b223c3510fac852799a88bf";
+const ownerA = "0x820479C7B095C5ca4969353ECcA5421c7012df5f";
 
 class MintBox extends Component {
   constructor(props) {
@@ -34,13 +38,14 @@ class MintBox extends Component {
           type: "function",
         },
       ],
-      "0x97ef0f1094fb9be74AB5e1ce5102D33BCa92D7F8"
+      "0x95024A0d0855aF15f5141f6f36fc0229c3d1a864"
     );
     let limit = await myContract.methods.limit().call();
     this.setState({ limit });
   };
 
-  transferMix = async (account) => {
+  transferMix = async () => {
+    const account = this.props.account;
     const data = caver.klay.abi.encodeFunctionCall(
       {
         constant: false,
@@ -68,16 +73,12 @@ class MintBox extends Component {
         stateMutability: "nonpayable",
         type: "function",
       },
-      [
-        "0x33365F518A0F333365b7FF53BEAbf1F5b1247b5C",
-        caver.utils.toPeb("1", "KLAY"),
-      ]
+      [ownerA, caver.utils.toPeb("1", "KLAY")]
     );
-
     const result = await caver.klay.sendTransaction({
       type: "SMART_CONTRACT_EXECUTION",
       from: account,
-      to: "0xdd483a970a7a7fef2b223c3510fac852799a88bf",
+      to: mixCA,
       gas: "8000000",
       data,
     });
@@ -90,7 +91,8 @@ class MintBox extends Component {
   };
 
   minting = async () => {
-    const account = this.props.address;
+    const account = this.props.account;
+    const balance = this.props.balance;
     const myContract = new caver.klay.Contract(
       [
         {
@@ -108,17 +110,39 @@ class MintBox extends Component {
           stateMutability: "view",
           type: "function",
         },
+        {
+          constant: false,
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "count",
+              type: "uint256",
+            },
+          ],
+          name: "mint",
+          outputs: [],
+          payable: true,
+          stateMutability: "payable",
+          type: "function",
+        },
       ],
-      "0x97ef0f1094fb9be74AB5e1ce5102D33BCa92D7F8"
+      "0x95024A0d0855aF15f5141f6f36fc0229c3d1a864"
     );
     let limit = await myContract.methods.limit().call();
-    if (limit != 0) {
-      const mixTransferResult = await this.transferMix(account);
-      if (mixTransferResult === true) {
-        alert("민팅 성공");
+    if (balance >= 1) {
+      if (limit != 0) {
+        await myContract.methods.mint(1).send({
+          type: "SMART_CONTRACT_EXECUTION",
+          from: account,
+          gas: "15000000",
+          value: caver.utils.toPeb("1", "KLAY"),
+        });
+        alert("민팅 성공 !");
+      } else {
+        alert("남은 수량이 없습니다.");
       }
     } else {
-      alert("남은 수량이 없습니다.");
+      alert("클레이가 부족합니다.");
     }
   };
 
@@ -136,7 +160,7 @@ class MintBox extends Component {
           <div className="MintBox__balanceOf">
             <span className="MintBox__label">Your Balance : </span>
             <span className="MintBox__balance">{balance}</span>
-            <span className="MintBox__unit"> Mix</span>
+            <span className="MintBox__unit"> KLAY</span>
           </div>
         </div>
       </div>

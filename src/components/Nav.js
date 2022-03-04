@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Nav.scss";
 
-const Nav = ({ address }) => (
+const Nav = ({ account }) => (
   <header className="Nav">
     <div className="Nav__inner">
       <h1 className="Nav__logo">
@@ -11,7 +11,7 @@ const Nav = ({ address }) => (
         </a>
       </h1>
       <h1>Mix Stone</h1>
-      <div className="Nav__Balance">{address || "Login with Kaikas :)"}</div>
+      <div className="Nav__Balance">{account || "Login with Kaikas :)"}</div>
     </div>
   </header>
 );
