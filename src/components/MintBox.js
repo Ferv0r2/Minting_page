@@ -38,10 +38,35 @@ class MintBox extends Component {
           type: "function",
         },
       ],
-      "0xbC44f9AA1CA80CA1841450330732A3f003ec3889"
+      "0x1644D4Fc2FCA9f408700DA0600B28aF69Dbb6A40"
     );
     let limit = await myContract.methods.limit().call();
     this.setState({ limit });
+  };
+
+  getMintprice = async () => {
+    const myContract = new caver.klay.Contract(
+      [
+        {
+          constant: true,
+          inputs: [],
+          name: "mintPrice",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          payable: false,
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+      "0x1644D4Fc2FCA9f408700DA0600B28aF69Dbb6A40"
+    );
+    let mintPrice = await myContract.methods.mintPrice().call();
+    return mintPrice;
   };
 
   // transferMix = async () => {
@@ -93,33 +118,9 @@ class MintBox extends Component {
   minting = async () => {
     const account = this.props.account;
     const balance = this.props.balance;
+    const limit = this.state.limit;
     const myContract = new caver.klay.Contract(
       [
-        {
-          constant: true,
-          inputs: [],
-          name: "limit",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          payable: false,
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          constant: false,
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "count",
-              type: "uint256",
-            },
-          ],
-        },
         {
           constant: false,
           inputs: [
@@ -136,56 +137,100 @@ class MintBox extends Component {
           ],
           name: "mint",
           outputs: [],
-          payable: true,
-          stateMutability: "payable",
+          payable: false,
+          stateMutability: "nonpayable",
           type: "function",
         },
       ],
-      "0xbC44f9AA1CA80CA1841450330732A3f003ec3889"
+      "0x1644D4Fc2FCA9f408700DA0600B28aF69Dbb6A40"
     );
 
-    // const mixContract = new caver.klay.Contract(
-    //   [
-    //     {
-    //       constant: true,
-    //       inputs: [
-    //         {
-    //           internalType: "address",
-    //           name: "owner",
-    //           type: "address",
-    //         },
-    //         {
-    //           internalType: "address",
-    //           name: "spender",
-    //           type: "address",
-    //         },
-    //       ],
-    //       name: "allowance",
-    //       outputs: [
-    //         {
-    //           internalType: "uint256",
-    //           name: "",
-    //           type: "uint256",
-    //         },
-    //       ],
-    //       payable: false,
-    //       stateMutability: "view",
-    //       type: "function",
-    //     },
-    //   ],
-    //   "0xdd483a970a7a7fef2b223c3510fac852799a88bf"
-    // );
+    const mixContract = new caver.klay.Contract(
+      [
+        {
+          constant: true,
+          inputs: [
+            {
+              internalType: "address",
+              name: "owner",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+          ],
+          name: "allowance",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          payable: false,
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          constant: false,
+          inputs: [
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "value",
+              type: "uint256",
+            },
+          ],
+          name: "approve",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          payable: false,
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      "0xdd483a970a7a7fef2b223c3510fac852799a88bf"
+    );
 
-    let limit = await myContract.methods.limit().call();
-    if (balance >= 1) {
+    let mintPrice = await this.getMintprice();
+    if (balance >= mintPrice) {
       if (limit != 0) {
-        await myContract.methods.mint(0, 1).send({
-          type: "SMART_CONTRACT_EXECUTION",
-          from: account,
-          gas: "15000000",
-          value: caver.utils.toPeb("1", "KLAY"),
-        });
-        alert("민팅 성공 !");
+        const allow = await mixContract.methods.allowance(ownerA, account);
+        if (allow) {
+          await mixContract.methods.approve(account, mintPrice).send({
+            from: account,
+            gas: "15000000",
+          });
+          await new Promise((resolve) => {
+            setTimeout(async () => {
+              await myContract.methods.mint(0, 1).send({
+                type: "SMART_CONTRACT_EXECUTION",
+                from: account,
+                gas: "15000000",
+              });
+              resolve();
+            }, 2000);
+          });
+          alert("민팅 성공 !");
+        } else {
+          await myContract.methods.mint(0, 1).send({
+            type: "SMART_CONTRACT_EXECUTION ",
+            from: account,
+            gas: "15000000",
+          });
+          alert("민팅 성공 !");
+        }
       } else {
         alert("남은 수량이 없습니다.");
       }
@@ -264,7 +309,7 @@ class MintBox extends Component {
           <div className="MintBox__balanceOf">
             <span className="MintBox__label">Your Balance : </span>
             <span className="MintBox__balance">{balance}</span>
-            <span className="MintBox__unit"> Klay</span>
+            <span className="MintBox__unit"> Mix</span>
           </div>
         </div>
       </div>

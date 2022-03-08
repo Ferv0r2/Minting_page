@@ -53,35 +53,35 @@ class KeplerMintPage extends Component {
     if (klaytn === undefined) return;
 
     const account = klaytn.selectedAddress;
-    const klayBalance = await caver.klay.getBalance(account);
-    // const myContract = new caver.klay.Contract(
-    //   [
-    //     {
-    //       constant: true,
-    //       inputs: [
-    //         {
-    //           internalType: "address",
-    //           name: "account",
-    //           type: "address",
-    //         },
-    //       ],
-    //       name: "balanceOf",
-    //       outputs: [
-    //         {
-    //           internalType: "uint256",
-    //           name: "",
-    //           type: "uint256",
-    //         },
-    //       ],
-    //       payable: false,
-    //       stateMutability: "view",
-    //       type: "function",
-    //     },
-    //   ],
-    //   "0xdd483a970a7a7fef2b223c3510fac852799a88bf"
-    // );
-    // const mixBalance = await myContract.methods.balanceOf(account).call();
-    const balance = String((klayBalance / 1000000000000000000).toFixed(4));
+    // const klayBalance = await caver.klay.getBalance(account);
+    const myContract = new caver.klay.Contract(
+      [
+        {
+          constant: true,
+          inputs: [
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+          ],
+          name: "balanceOf",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          payable: false,
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+      "0xdd483a970a7a7fef2b223c3510fac852799a88bf"
+    );
+    const mixBalance = await myContract.methods.balanceOf(account).call();
+    const balance = String((mixBalance / 1000000000000000000).toFixed(4));
     this.setState({
       account,
       balance,
