@@ -301,7 +301,13 @@ class MintBox extends Component {
     return (
       <div className="MintBox">
         <div className="MintBox__contents">
-          <img src="images/char.png"></img>
+          <img src="images/mix.png"></img>
+          <video
+            src="images/stone.mp4"
+            autoplay="autoplay"
+            loop="loop"
+            muted="muted"
+          ></video>
           <div className="MintBox__count">남은 수량 : {limit}개</div>
           <div className="MintBox__button" onClick={() => this.minting()}>
             Mint
@@ -310,6 +316,10 @@ class MintBox extends Component {
             <span className="MintBox__label">Your Balance : </span>
             <span className="MintBox__balance">{balance}</span>
             <span className="MintBox__unit"> Mix</span>
+          </div>
+          <div className="MintBox__info">
+            <p>* 믹스스톤 민팅은 케플러 홀더만 가능합니다.</p>
+            <p>* 트랜잭션은 최대 1개로 개당 15 Mix입니다.</p>
           </div>
         </div>
       </div>

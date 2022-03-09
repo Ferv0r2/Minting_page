@@ -1,14 +1,14 @@
 .Footer {
-  width: 100%;
   padding-top: 20px;
   justify-content: center;
   .Footer__main {
-    width: 100%;
+    justify-items: center;
     height: 180px;
     display: flex;
     color: $half-color;
+    margin: 100px;
     a {
-      margin-top: 90px;
+      padding-top: 50px;
       flex: 1;
       text-align: center;
 

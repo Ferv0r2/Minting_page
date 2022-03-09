@@ -1,8 +1,26 @@
+@keyframes move {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 .MintBox {
-  float: left;
-  width: 65%;
   height: 500px;
   color: #fff;
+  margin-left: 300px;
+  margin-right: 300px;
 }
 
 .MintBox__contents {
@@ -10,9 +28,17 @@
   text-align: center;
   justify-content: space-between;
 
+  video {
+    padding: 15px;
+    width: 270px;
+    outline: none;
+    border: none;
+  }
+
   img {
     padding: 15px;
-    width: 200px;
+    width: 300px;
+    animation: move 2.5s infinite linear;
   }
 }
 
@@ -22,8 +48,10 @@
   padding: 20px;
   border: 5px solid $hover-color;
   border-radius: 10px;
-  margin-left: 300px;
-  margin-right: 300px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .MintBox__count {
@@ -35,4 +63,13 @@
   font-size: 20px;
   padding: 20px;
   background-color: $hover-color;
+}
+
+.MintBox__info {
+  font-size: 18px;
+  padding: 20px;
+
+  p:nth-child(1) {
+    padding-bottom: 5px;
+  }
 }

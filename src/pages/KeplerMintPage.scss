@@ -16,6 +16,28 @@
   }
 }
 
+@keyframes bubblemove {
+  0% {
+    bottom: 5%;
+  }
+  50% {
+    bottom: 0;
+  }
+  100% {
+    bottom: 5%;
+  }
+}
+
+.Mushroom {
+  img {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 500px;
+    animation: bubblemove 2.5s infinite linear;
+  }
+}
+
 .KeplerMintPage__content {
   display: flex;
   padding: 40px 0;

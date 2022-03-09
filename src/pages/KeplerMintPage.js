@@ -5,7 +5,6 @@ import keplerContract from "klaytn/KeplerContract";
 
 import Nav from "components/Nav";
 import MintBox from "components/MintBox";
-import Stone from "components/Stone";
 import Footer from "components/Footer";
 
 import "./KeplerMintPage.scss";
@@ -106,9 +105,11 @@ class KeplerMintPage extends Component {
         <div className="KeplerMintPage__main">
           <div className="KeplerMintPage__contents">
             <MintBox account={account} balance={balance} />
-            <Stone />
+            <Footer />
           </div>
-          <Footer />
+        </div>
+        <div className="Mushroom">
+          <img src="images/mushroom.png"></img>
         </div>
       </div>
     );
