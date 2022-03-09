@@ -5,7 +5,9 @@ import keplerContract from "klaytn/keplerContract";
 import "./MintBox.scss";
 
 const mixCA = "0xdd483a970a7a7fef2b223c3510fac852799a88bf";
-const ownerA = "0x820479C7B095C5ca4969353ECcA5421c7012df5f";
+const ownerA = "0x33365F518A0F333365b7FF53BEAbf1F5b1247b5C";
+// const minterCA = "0xE749A222876bC1667D0d32e36C8c60F73FB084A0";
+const minterCA = "0x512cfEaaE72513222B3f8903C78bDb9A8B33e629";
 
 class MintBox extends Component {
   constructor(props) {
@@ -38,7 +40,7 @@ class MintBox extends Component {
           type: "function",
         },
       ],
-      "0x1644D4Fc2FCA9f408700DA0600B28aF69Dbb6A40"
+      minterCA
     );
     let limit = await myContract.methods.limit().call();
     this.setState({ limit });
@@ -63,7 +65,7 @@ class MintBox extends Component {
           type: "function",
         },
       ],
-      "0x1644D4Fc2FCA9f408700DA0600B28aF69Dbb6A40"
+      minterCA
     );
     let mintPrice = await myContract.methods.mintPrice().call();
     return mintPrice;
@@ -141,8 +143,23 @@ class MintBox extends Component {
           stateMutability: "nonpayable",
           type: "function",
         },
+        {
+          constant: false,
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "count",
+              type: "uint256",
+            },
+          ],
+          name: "sendMix",
+          outputs: [],
+          payable: false,
+          stateMutability: "nonpayable",
+          type: "function",
+        },
       ],
-      "0x1644D4Fc2FCA9f408700DA0600B28aF69Dbb6A40"
+      minterCA
     );
 
     const mixContract = new caver.klay.Contract(
@@ -200,21 +217,22 @@ class MintBox extends Component {
           type: "function",
         },
       ],
-      "0xdd483a970a7a7fef2b223c3510fac852799a88bf"
+      mixCA
     );
 
     let mintPrice = await this.getMintprice();
     if (balance >= mintPrice) {
       if (limit != 0) {
-        const allow = await mixContract.methods.allowance(ownerA, account);
+        const allow = await mixContract.methods.allowance(ownerA, minterCA);
         if (allow) {
-          await mixContract.methods.approve(account, mintPrice).send({
+          await mixContract.methods.approve(minterCA, mintPrice).send({
             from: account,
             gas: "15000000",
           });
           await new Promise((resolve) => {
             setTimeout(async () => {
-              await myContract.methods.mint(0, 1).send({
+              await myContract.methods.sendMix(1).send({
+                // await myContract.methods.mint(0, 1).send({
                 type: "SMART_CONTRACT_EXECUTION",
                 from: account,
                 gas: "15000000",
@@ -304,7 +322,7 @@ class MintBox extends Component {
           <img src="images/mix.png"></img>
           <video
             src="images/stone.mp4"
-            autoplay="autoplay"
+            autoPlay="autoPlay"
             loop="loop"
             muted="muted"
           ></video>
