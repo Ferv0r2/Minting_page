@@ -6,8 +6,7 @@ import "./MintBox.scss";
 
 const mixCA = "0xdd483a970a7a7fef2b223c3510fac852799a88bf";
 const ownerA = "0x33365F518A0F333365b7FF53BEAbf1F5b1247b5C";
-// const minterCA = "0xE749A222876bC1667D0d32e36C8c60F73FB084A0";
-const minterCA = "0x512cfEaaE72513222B3f8903C78bDb9A8B33e629";
+const minterCA = "0x4E9513Cb7F167bF0c1D51af9fAd4BfF81921Cb6c";
 
 class MintBox extends Component {
   constructor(props) {
