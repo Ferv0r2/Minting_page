@@ -33,8 +33,12 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 500px;
+    width: 25em;
     animation: bubblemove 2.5s infinite linear;
+  }
+
+  @media screen and (max-width: 800px) {
+    display: none;
   }
 }
 

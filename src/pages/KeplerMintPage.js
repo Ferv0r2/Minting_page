@@ -8,6 +8,7 @@ import MintBox from "components/MintBox";
 import Footer from "components/Footer";
 
 import "./KeplerMintPage.scss";
+import { useEffect } from "react/cjs/react.production.min";
 
 class KeplerMintPage extends Component {
   constructor(props) {

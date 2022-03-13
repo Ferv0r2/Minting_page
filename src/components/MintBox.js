@@ -17,7 +17,7 @@ class MintBox extends Component {
   }
 
   componentDidMount() {
-    this.getLimit();
+    this.setLimit = setInterval(() => this.getLimit(), 1000);
   }
 
   getLimit = async () => {
@@ -323,9 +323,8 @@ class MintBox extends Component {
             src="images/stone.mp4"
             autoPlay="autoPlay"
             loop="loop"
-            muted="muted"
-          ></video>
-          <div className="MintBox__count">남은 수량 : {limit}개</div>
+            muted="muted"></video>
+          <div className="MintBox__count">남은 수량 : {limit} / 200 개</div>
           <div className="MintBox__button" onClick={() => this.minting()}>
             Mint
           </div>
@@ -337,6 +336,11 @@ class MintBox extends Component {
           <div className="MintBox__info">
             <p>* 믹스스톤 민팅은 케플러 홀더만 가능합니다.</p>
             <p>* 트랜잭션은 최대 1개로 개당 15 Mix입니다.</p>
+            <br></br>
+            <p>
+              * 트랜잭션은 2번 발생하며, 하나는 믹스 사용 허가, 다른 하나는
+              민팅입니다.
+            </p>
           </div>
         </div>
       </div>
