@@ -218,14 +218,34 @@ class MintBox extends Component {
               resolve();
             }, 1000);
           });
-          alert("민팅 성공 !");
+          if (token == 15) {
+            alert("Mixstone A 민팅 성공 !");
+          } else if (token == 16) {
+            alert("Mixstone B 민팅 성공 !");
+          } else if (token == 17) {
+            alert("Mixstone C 민팅 성공 !");
+          } else if (token == 18) {
+            alert("Mixstone D 민팅 성공 !");
+          } else if (token == 19) {
+            alert("Mixstone E 민팅 성공 !");
+          }
         } else {
           await myContract.methods.mint(token, 1).send({
             type: "SMART_CONTRACT_EXECUTION ",
             from: account,
             gas: "15000000",
           });
-          alert("민팅 성공 !");
+          if (token == 15) {
+            alert("Mixstone A 민팅 성공 !");
+          } else if (token == 16) {
+            alert("Mixstone B 민팅 성공 !");
+          } else if (token == 17) {
+            alert("Mixstone C 민팅 성공 !");
+          } else if (token == 18) {
+            alert("Mixstone D 민팅 성공 !");
+          } else if (token == 19) {
+            alert("Mixstone E 민팅 성공 !");
+          }
         }
       } else {
         alert("남은 수량이 없습니다.");
@@ -234,62 +254,6 @@ class MintBox extends Component {
       alert("클레이가 부족합니다.");
     }
   };
-
-  // minting = async () => {
-  //   const account = this.props.account;
-  //   const balance = this.props.balance;
-  //   const myContract = new caver.klay.Contract(
-  //     [
-  //       {
-  //         constant: true,
-  //         inputs: [],
-  //         name: "limit",
-  //         outputs: [
-  //           {
-  //             internalType: "uint256",
-  //             name: "",
-  //             type: "uint256",
-  //           },
-  //         ],
-  //         payable: false,
-  //         stateMutability: "view",
-  //         type: "function",
-  //       },
-  //       {
-  //         constant: false,
-  //         inputs: [
-  //           {
-  //             internalType: "uint256",
-  //             name: "count",
-  //             type: "uint256",
-  //           },
-  //         ],
-  //         name: "mint",
-  //         outputs: [],
-  //         payable: true,
-  //         stateMutability: "payable",
-  //         type: "function",
-  //       },
-  //     ],
-  //     "0x95024A0d0855aF15f5141f6f36fc0229c3d1a864"
-  //   );
-  //   let limit = await myContract.methods.limit().call();
-  //   if (balance >= 1) {
-  //     if (limit != 0) {
-  //       await myContract.methods.mint(1).send({
-  //         type: "SMART_CONTRACT_EXECUTION",
-  //         from: account,
-  //         gas: "15000000",
-  //         value: caver.utils.toPeb("1", "KLAY"),
-  //       });
-  //       alert("민팅 성공 !");
-  //     } else {
-  //       alert("남은 수량이 없습니다.");
-  //     }
-  //   } else {
-  //     alert("클레이가 부족합니다.");
-  //   }
-  // };
 
   render() {
     const { balance } = this.props;
