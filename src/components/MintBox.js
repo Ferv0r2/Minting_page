@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import caver from "klaytn/caver";
-import keplerContract from "klaytn/keplerContract";
 
 import "./MintBox.scss";
 
 const mixCA = "0xdd483a970a7a7fef2b223c3510fac852799a88bf";
 const ownerA = "0x33365F518A0F333365b7FF53BEAbf1F5b1247b5C";
-const minterCA = "0x4E9513Cb7F167bF0c1D51af9fAd4BfF81921Cb6c";
+const minterCA = "0xE7061A42069aFa2DD5146aFdcc0bA8Fb82A67a61";
 
 class MintBox extends Component {
   constructor(props) {
@@ -70,52 +69,6 @@ class MintBox extends Component {
     return mintPrice;
   };
 
-  // transferMix = async () => {
-  //   const account = this.props.account;
-  //   const data = caver.klay.abi.encodeFunctionCall(
-  //     {
-  //       constant: false,
-  //       inputs: [
-  //         {
-  //           internalType: "address",
-  //           name: "recipient",
-  //           type: "address",
-  //         },
-  //         {
-  //           internalType: "uint256",
-  //           name: "amount",
-  //           type: "uint256",
-  //         },
-  //       ],
-  //       name: "transfer",
-  //       outputs: [
-  //         {
-  //           internalType: "bool",
-  //           name: "",
-  //           type: "bool",
-  //         },
-  //       ],
-  //       payable: false,
-  //       stateMutability: "nonpayable",
-  //       type: "function",
-  //     },
-  //     [ownerA, caver.utils.toPeb("1", "KLAY")]
-  //   );
-  //   const result = await caver.klay.sendTransaction({
-  //     type: "SMART_CONTRACT_EXECUTION",
-  //     from: account,
-  //     to: mixCA,
-  //     gas: "8000000",
-  //     data,
-  //   });
-  //   console.log(result);
-  //   const trxResult = await caver.klay.getTransactionReceipt(
-  //     result.senderTxHash
-  //   );
-  //   if (trxResult.status === true) return true;
-  //   return false;
-  // };
-
   minting = async () => {
     const account = this.props.account;
     const balance = this.props.balance;
@@ -147,11 +100,36 @@ class MintBox extends Component {
           inputs: [
             {
               internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
               name: "count",
               type: "uint256",
             },
           ],
-          name: "sendMix",
+          name: "firstMint",
+          outputs: [],
+          payable: false,
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          constant: false,
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "count",
+              type: "uint256",
+            },
+          ],
+          name: "mint",
           outputs: [],
           payable: false,
           stateMutability: "nonpayable",
@@ -222,6 +200,7 @@ class MintBox extends Component {
     let mintPrice = await this.getMintprice();
     if (balance >= mintPrice) {
       if (limit != 0) {
+        const token = Math.floor(Math.random() * 5) + 15;
         const allow = await mixContract.methods.allowance(ownerA, minterCA);
         if (allow) {
           await mixContract.methods.approve(minterCA, mintPrice).send({
@@ -230,18 +209,18 @@ class MintBox extends Component {
           });
           await new Promise((resolve) => {
             setTimeout(async () => {
-              await myContract.methods.sendMix(1).send({
-                // await myContract.methods.mint(0, 1).send({
+              // await myContract.methods.sendMix(1).send({
+              await myContract.methods.mint(token, 1).send({
                 type: "SMART_CONTRACT_EXECUTION",
                 from: account,
                 gas: "15000000",
               });
               resolve();
-            }, 2000);
+            }, 1000);
           });
           alert("민팅 성공 !");
         } else {
-          await myContract.methods.mint(0, 1).send({
+          await myContract.methods.mint(token, 1).send({
             type: "SMART_CONTRACT_EXECUTION ",
             from: account,
             gas: "15000000",
@@ -323,7 +302,8 @@ class MintBox extends Component {
             src="images/stone.mp4"
             autoPlay="autoPlay"
             loop="loop"
-            muted="muted"></video>
+            muted="muted"
+          ></video>
           <div className="MintBox__count">남은 수량 : {limit} / 200 개</div>
           <div className="MintBox__button" onClick={() => this.minting()}>
             Mint
