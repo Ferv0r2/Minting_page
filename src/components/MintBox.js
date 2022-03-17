@@ -210,8 +210,8 @@ class MintBox extends Component {
           await new Promise((resolve) => {
             setTimeout(async () => {
               // await myContract.methods.sendMix(1).send({
-              await myContract.methods.firstMint(token, 1).send({
-                // await myContract.methods.mint(token, 1).send({
+              // await myContract.methods.firstMint(token, 1).send({
+              await myContract.methods.mint(token, 1).send({
                 type: "SMART_CONTRACT_EXECUTION",
                 from: account,
                 gas: "15000000",
@@ -267,9 +267,10 @@ class MintBox extends Component {
             src="images/stone.mp4"
             autoPlay="autoPlay"
             loop="loop"
-            muted="muted"
-          ></video>
-          <div className="MintBox__count">남은 수량 : {limit} / 200 개</div>
+            muted="muted"></video>
+          <div className="MintBox__count">
+            남은 수량 : {limit} / 100 개 ( 1차 200개 완료 )
+          </div>
           <div className="MintBox__button" onClick={() => this.minting()}>
             Mint
           </div>
