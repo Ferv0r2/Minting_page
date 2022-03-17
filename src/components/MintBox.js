@@ -198,7 +198,7 @@ class MintBox extends Component {
     );
 
     let mintPrice = await this.getMintprice();
-    if (balance >= mintPrice) {
+    if (balance >= mintPrice / 1000000000000000000) {
       if (limit != 0) {
         const token = Math.floor(Math.random() * 5) + 15;
         const allow = await mixContract.methods.allowance(ownerA, minterCA);
@@ -210,7 +210,8 @@ class MintBox extends Component {
           await new Promise((resolve) => {
             setTimeout(async () => {
               // await myContract.methods.sendMix(1).send({
-              await myContract.methods.mint(token, 1).send({
+              await myContract.methods.firstMint(token, 1).send({
+                // await myContract.methods.mint(token, 1).send({
                 type: "SMART_CONTRACT_EXECUTION",
                 from: account,
                 gas: "15000000",
@@ -251,7 +252,7 @@ class MintBox extends Component {
         alert("남은 수량이 없습니다.");
       }
     } else {
-      alert("클레이가 부족합니다.");
+      alert("믹스가 부족합니다.");
     }
   };
 
@@ -284,6 +285,12 @@ class MintBox extends Component {
             <p>
               * 트랜잭션은 2번 발생하며, 하나는 믹스 사용 허가, 다른 하나는
               민팅입니다.
+            </p>
+            <br></br>
+            <p>
+              <a href="https://klu.bs/metaverse/6/item/0x301895164F700e8f9556c562882AC1b63dFB3F44/mine">
+                [ 민팅한 스톤 보러가기 ]
+              </a>
             </p>
           </div>
         </div>

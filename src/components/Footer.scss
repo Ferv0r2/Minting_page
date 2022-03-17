@@ -1,13 +1,16 @@
 .Footer {
   justify-content: center;
+
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
+
   .Footer__main {
     justify-items: center;
-    height: 180px;
     display: flex;
     color: $half-color;
     margin: 100px;
     a {
-      padding-top: 50px;
       flex: 1;
       text-align: center;
 
